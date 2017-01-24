@@ -1,0 +1,29 @@
+package br.com.caelum.financas.teste;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import br.com.caelum.financas.modelo.Conta;
+
+public class TesteJPA {
+
+	public static void main(String[] args) {
+		
+		Conta conta = new Conta();
+		conta.setTitular("Joao Ferreira");
+		conta.setBanco("ITAU");
+		conta.setNumero("12345");
+		conta.setAgencia("341");
+		
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("financas");
+		EntityManager manager = entityManagerFactory.createEntityManager();
+		
+		
+		manager.persist(conta);
+		
+		
+		manager.close();
+	}
+
+}

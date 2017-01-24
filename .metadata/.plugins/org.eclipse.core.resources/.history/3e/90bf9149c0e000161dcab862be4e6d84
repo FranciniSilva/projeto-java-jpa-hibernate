@@ -1,0 +1,39 @@
+package br.com.caelum.financas.teste;
+
+import java.util.Calendar;
+
+import javax.persistence.EntityManager;
+
+import br.com.caelum.financas.modelo.Conta;
+import br.com.caelum.financas.modelo.Movimentacao;
+import br.com.caelum.financas.modelo.TipoMovimentacao;
+import br.com.caelum.financas.util.JPAUtil;
+
+public class TesteJPARelacionamento {
+
+	public static void main(String[] args) {
+
+		Conta conta = new Conta();
+		conta.setId(7);
+		conta.setTitular("Luiza Brandao");
+		conta.setBanco("341 - BANCO ITAU");
+		conta.setNumero("76532-4");
+		conta.setAgencia("7654");
+		
+		Movimentacao movimentacao = new Movimentacao();
+		movimentacao.setData(Calendar.getInstance());
+		movimentacao.setDescricao("Conta de luz");
+		movimentacao.setTipoMovimentacao(TipoMovimentacao.SAIDA);
+		movimentacao.setValor(new BigDecimal(123.9));
+
+		EntityManager em = new JPAUtil().getEntityManager();
+		em.getTransaction().begin();
+
+		em.persist(conta);
+
+		em.getTransaction().commit();
+		em.close();
+
+	}
+
+}

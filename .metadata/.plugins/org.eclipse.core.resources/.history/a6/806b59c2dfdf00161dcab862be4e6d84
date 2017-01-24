@@ -1,0 +1,8 @@
+package br.com.caelum.financas.util;
+
+public class JPAUtil {
+
+	private static EntityManagerFactory entityManagerFactory = Persistence
+			.createEntityManagerFactory("financas");
+
+}

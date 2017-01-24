@@ -1,0 +1,33 @@
+package br.com.caelum.financas.teste;
+
+import javax.persistence.EntityManager;
+
+import br.com.caelum.financas.modelo.Conta;
+import br.com.caelum.financas.util.JPAUtil;
+
+public class TesteJPA {
+
+	public static void main(String[] args) {
+		
+		Conta conta = new Conta();
+		conta.setTitular("Fábio Almeida");
+		conta.setBanco("Caixa Economica");
+		conta.setNumero("983233-7");
+		conta.setAgencia("081");
+		
+		EntityManager em = new JPAUtil().getEntityManager();
+		
+		em.getTransaction().begin();
+		
+		Conta conta = em.find(Conta.class, 1);
+		
+		System.out.println(conta.getTitular());
+		
+		conta.setTitular("Pedro Ferreira");
+		
+		em.getTransaction().commit();
+		em.close();
+
+	}
+
+}
